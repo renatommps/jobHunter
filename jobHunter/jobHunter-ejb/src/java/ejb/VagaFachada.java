@@ -29,8 +29,24 @@ public class VagaFachada {
 
     // Metodo que retorna a lista de vagas armazenada na tabela Vaga
     public List<ejb.Vaga> getListaVagas() {
+ 
         Query query = em.createNamedQuery("Vaga.findAll");
         return query.getResultList();
     }
     
+    // Metodo que retorna a lista de vagas armazenada na tabela Vaga
+    public List<ejb.VagaFormatada> getListaVagasFormatadas() {
+        String sql = "SELECT " +
+            "    v.LOCAL_DE_TRABALHO," +
+            "    v.REQUISITOS," +
+            "    v.SALARIO," +
+            "    v.EMPRESA," +
+            "    v.HORARIO_DE_TRABALHO," +
+            "    a.NOME" +
+            "FROM app.vaga as v join APP.AREA as a on v.VAGA_ID = a.id" +
+            "    where v.ABERTA = 'true'";
+        
+        Query query = em.createNativeQuery(sql);
+        return query.getResultList();
+    }
 }
