@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author renato
+ * @author 18100871
  */
 @Entity
 @Table(name = "VAGA")
@@ -30,10 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Vaga.findByLocalDeTrabalho", query = "SELECT v FROM Vaga v WHERE v.localDeTrabalho = :localDeTrabalho")
     , @NamedQuery(name = "Vaga.findByRequisitos", query = "SELECT v FROM Vaga v WHERE v.requisitos = :requisitos")
     , @NamedQuery(name = "Vaga.findBySalario", query = "SELECT v FROM Vaga v WHERE v.salario = :salario")
-    , @NamedQuery(name = "Vaga.findByArea", query = "SELECT v FROM Vaga v WHERE v.area = :area")
     , @NamedQuery(name = "Vaga.findByEmpresa", query = "SELECT v FROM Vaga v WHERE v.empresa = :empresa")
     , @NamedQuery(name = "Vaga.findByHorarioDeTrabalho", query = "SELECT v FROM Vaga v WHERE v.horarioDeTrabalho = :horarioDeTrabalho")
-    , @NamedQuery(name = "Vaga.findByAberta", query = "SELECT v FROM Vaga v WHERE v.aberta = :aberta")})
+    , @NamedQuery(name = "Vaga.findByAberta", query = "SELECT v FROM Vaga v WHERE v.aberta = :aberta")
+    , @NamedQuery(name = "Vaga.findByAreaId", query = "SELECT v FROM Vaga v WHERE v.areaId = :areaId")})
 public class Vaga implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,9 +51,6 @@ public class Vaga implements Serializable {
     @Column(name = "SALARIO")
     private Integer salario;
     @Size(max = 60)
-    @Column(name = "AREA")
-    private String area;
-    @Size(max = 60)
     @Column(name = "EMPRESA")
     private String empresa;
     @Size(max = 100)
@@ -64,6 +61,8 @@ public class Vaga implements Serializable {
     @Size(min = 1, max = 5)
     @Column(name = "ABERTA")
     private String aberta;
+    @Column(name = "AREA_ID")
+    private Integer areaId;
 
     public Vaga() {
     }
@@ -109,14 +108,6 @@ public class Vaga implements Serializable {
         this.salario = salario;
     }
 
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
     public String getEmpresa() {
         return empresa;
     }
@@ -139,6 +130,14 @@ public class Vaga implements Serializable {
 
     public void setAberta(String aberta) {
         this.aberta = aberta;
+    }
+
+    public Integer getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Integer areaId) {
+        this.areaId = areaId;
     }
 
     @Override
