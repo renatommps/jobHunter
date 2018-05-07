@@ -33,7 +33,7 @@ public class VagaMBean {
         return vagaFachada.getListaVagas();
     }
     
-    public List<VagaFormatada> getListaVagasFormatadas {
+    public List<Vaga> getListaVagasFormatadas() {
         return vagaFachada.getListaVagasFormatadas();
     }
     

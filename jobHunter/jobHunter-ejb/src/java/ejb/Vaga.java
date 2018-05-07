@@ -6,12 +6,15 @@
 package ejb;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,7 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Vaga.findByEmpresa", query = "SELECT v FROM Vaga v WHERE v.empresa = :empresa")
     , @NamedQuery(name = "Vaga.findByHorarioDeTrabalho", query = "SELECT v FROM Vaga v WHERE v.horarioDeTrabalho = :horarioDeTrabalho")
     , @NamedQuery(name = "Vaga.findByAberta", query = "SELECT v FROM Vaga v WHERE v.aberta = :aberta")
-    , @NamedQuery(name = "Vaga.findByAreaId", query = "SELECT v FROM Vaga v WHERE v.areaId = :areaId")})
+    , @NamedQuery(name = "Vaga.findByAreaId", query = "SELECT v FROM Vaga v WHERE v.areaId = :areaId")
+    , @NamedQuery(name = "Vaga.findAllWithArea", query =  "SELECT  v.LOCAL_DE_TRABALHO v.REQUISITOS, v.SALARIO, v.EMPRESA, " +
+            "v.HORARIO_DE_TRABALHO a.NOME FROM app.vaga as v join areas a on v.VAGA_ID = a.id where v.ABERTA = 'true'")})
+
 public class Vaga implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,6 +70,9 @@ public class Vaga implements Serializable {
     @Column(name = "AREA_ID")
     private Integer areaId;
 
+    @OneToMany(mappedBy="area")
+    Set<Area> areas;
+    
     public Vaga() {
     }
 
